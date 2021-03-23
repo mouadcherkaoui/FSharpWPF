@@ -4,7 +4,7 @@ open System.Windows
 open ViewModels
 
     type MainWindowViewModel() = 
-
+        inherit ObservableObject()
         let mutable title = ""
         let mutable content = "" 
                 
@@ -12,8 +12,7 @@ open ViewModels
             with get() = title 
             and set(value) = 
                 title <- value
-                //propertyChangedEvent.Trigger(this, PropertyChangedEventArgs("Title")) 
-                // SetProperty (ref title, value, nameof(this.Title))
+                this.SetProperty (ref title, value, nameof(this.Title))
 
         member this.Content
             with get() = content

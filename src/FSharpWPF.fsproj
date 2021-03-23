@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0-Windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AlwaysCompileMarkupFilesInSeparateDomain>false</AlwaysCompileMarkupFilesInSeparateDomain>
   </PropertyGroup>
 
@@ -15,6 +16,8 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Resource Include="Views\MainWindow.xaml" />
+    <Resource Include="Views\MainWindow.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 </Project>
