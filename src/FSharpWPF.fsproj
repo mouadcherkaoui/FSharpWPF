@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0-Windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AlwaysCompileMarkupFilesInSeparateDomain>false</AlwaysCompileMarkupFilesInSeparateDomain>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="ViewModels\RelayCommand.fs" />
+    <Compile Include="ViewModels\ObservableObject.fs" />
+    <Compile Include="ViewModels\MainWindowViewModel.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Resource Include="Views\MainWindow.xaml" />
+  </ItemGroup>
+</Project>
