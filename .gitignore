@@ -352,3 +352,5 @@ src/.ionide/
 src/.vscode/
 src/bin/
 src/obj/
+
+.vscode/
