@@ -7,7 +7,7 @@ open ViewModels
         inherit ObservableObject()
         let mutable title = ""
         let mutable content = "" 
-                
+        
         member this.Title
             with get() = title 
             and set(value) = 
@@ -16,7 +16,7 @@ open ViewModels
 
         member this.Content
             with get() = content
-            and set(value) = content <- value
+            and set(value) = this.SetProperty(ref content, value, nameof(this.Content))
 
         member this.Items = new ObservableCollection<obj>()
         

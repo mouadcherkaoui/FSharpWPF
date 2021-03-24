@@ -9,15 +9,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="UserControls\Participant.xaml.fs" />
     <Compile Include="ViewModels\RelayCommand.fs" />
     <Compile Include="ViewModels\ObservableObject.fs" />
-    <Compile Include="ViewModels\MainWindowViewModel.fs" />
+    <Compile Include="ViewModels\PageViewModel.fs" />    
+    <Compile Include="ViewModels\MainWindowViewModel.fs" />    
     <Compile Include="Program.fs" />
   </ItemGroup>
   
   <ItemGroup>
+    <Resource Include="UserControls\Participant.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>    
     <Resource Include="Views\MainWindow.xaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="App.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>    
   </ItemGroup>
 </Project>
