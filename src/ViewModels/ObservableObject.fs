@@ -7,6 +7,6 @@ open System.ComponentModel
             [<CLIEvent>]
             member this.PropertyChanged = propertyChangedEvent.Publish
         
-        member this.SetProperty<'T>(property:ref<'T>, value:'T, name:string) =
-            property.Value <- value
+        member this.SetProperty<'T>(property:byref<'T>, value:'T, name:string) =
+            property <- value
             propertyChangedEvent.Trigger(this, PropertyChangedEventArgs(name))

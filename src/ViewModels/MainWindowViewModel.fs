@@ -6,17 +6,15 @@ open ViewModels
     type MainWindowViewModel() = 
         inherit ObservableObject()
         let mutable title = ""
-        let mutable content = "" 
+        let mutable content = ""
         
         member this.Title
             with get() = title 
-            and set(value) = 
-                title <- value
-                this.SetProperty (ref title, value, nameof(this.Title))
+            and set(value) = this.SetProperty (&title, value, "Title")
 
         member this.Content
             with get() = content
-            and set(value) = this.SetProperty(ref content, value, nameof(this.Content))
+            and set(value) = this.SetProperty(&content, value, "Content")
 
         member this.Items = new ObservableCollection<obj>()
         
@@ -24,5 +22,3 @@ open ViewModels
         
         member this.ShowMessageCommand = 
             RelayCommand((fun f -> MessageBox.Show(this.Title) |> ignore), (fun f -> true))
-
-        
