@@ -4,5 +4,5 @@ open System.Windows
 open System.Windows.Controls
 open System.Windows.Markup
 
-type Participant () as self = 
+type Participant () = 
     inherit UserControl ()

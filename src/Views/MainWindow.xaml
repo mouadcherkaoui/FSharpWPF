@@ -27,7 +27,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBox x:Name="_Title" Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <TextBlock x:Name="Title" Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+            <TextBlock x:Name="Title" Text="{Binding Title, Mode=TwoWay}"></TextBlock>
             <Button x:Name="button1"
                 Content="{Binding ButtonContent}" Command="{Binding ShowMessageCommand}"></Button>
         <ListBox ItemsSource="{Binding Items}"/>
