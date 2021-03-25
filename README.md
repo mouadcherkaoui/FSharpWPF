@@ -126,3 +126,59 @@ open System.ComponentModel
                 content <- value
                 this.eventPublisher.Trigger(new PropertyChangedEventArgs("Content"))
 ```
+
+we'll return back to disect this view model and explain its definition and why we are using th "Event<_,_>" object.
+
+now we can go to the "Program.fs" file and update it to start our application:
+
+```fsharp
+// we add our namespace opens/imports equivalent in csharp
+open System
+open System.Windows
+open FSharpWPF.ViewModels
+
+// Define a function to construct a message to print
+
+[<STAThread>]
+[<EntryPoint>]
+let main argv =    
+    (* we define a Uri object that we pass through the pipe operator '|>' to our Application.LoadComponent static method 
+    and we cast it "using :?> operator" to an Application type
+    *)
+
+    let application = 
+        Uri("/FSharpwPF;component/App.xaml", UriKind.Relative)
+        |> fun uri -> Application.LoadComponent(uri) :?> Application
+
+    application.Run() |> ignore
+
+    0 // return an integer exit code
+```
+
+now check your project file "FSharpMVVM.fsproj" and make sure that the "App.xaml", and "MainWindow.xaml" are declared as resources, and the "Program.fs" is the last one at the bottom in the `<ItemGroup>` section:
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-Windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>    
+    <Compile Include="ViewModels\MainWindowViewModel.fs" />    
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+  
+  <ItemGroup>    
+    <Resource Include="Views\MainWindow.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="App.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>    
+  </ItemGroup>
+</Project>
+
+```
+
