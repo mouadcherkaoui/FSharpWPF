@@ -156,6 +156,7 @@ let main argv =
 ```
 
 now check your project file "FSharpMVVM.fsproj" and make sure that the "App.xaml", and "MainWindow.xaml" are declared as resources, and the "Program.fs" is the last one at the bottom in the `<ItemGroup>` section:
+
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
 
@@ -171,14 +172,17 @@ now check your project file "FSharpMVVM.fsproj" and make sure that the "App.xaml
   </ItemGroup>
   
   <ItemGroup>    
-    <Resource Include="Views\MainWindow.xaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="App.xaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>    
+    <Resource Include="Views\MainWindow.xaml"/>
+    <Resource Include="App.xaml"/>    
   </ItemGroup>
 </Project>
 
 ```
 
+now we are ready to run our great blank app!
+
+```bash
+dotnet run
+```
+
+now we can continue adding views, viewmodels and functions and more, all with the great abilities that a functional first/multiparadigm language can offer.
