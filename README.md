@@ -25,6 +25,7 @@ this will create a new console project in the folder FSharpMVVM and will start v
 ```
 
 or for .Net 5:
+
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
@@ -32,8 +33,8 @@ or for .Net 5:
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 </Project>
-
 ```
+
 for dotnet core you need to change the Sdk attribute value and add the "UseWPF" tag like bellow:
 
 ```xml
@@ -56,4 +57,72 @@ and for .Net 5 you need to add -Windows to the target framework like this:
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 </Project>
+```
+now we need to add new App.xaml file which will define our application root object, you can grab an existing one or copy the xaml bellow:
+
+```xml
+<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="Views/MainWindow.xaml">
+</Application>
+```
+
+as you see we set the StartupUri  to the view "Views\MainWindow.xaml", which we'll add too:
+
+```xml
+<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:FSharpMVVM.ViewModels;assembly=FSharpMVVM"
+    Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+
+    </Grid>
+</Window>
+```
+
+now we need to add our MainWindowViewModel which we declared in our view as an xml namespace :
+
+```xml
+xmlns:vm="clr-namespace:FSharpMVVM.ViewModels;assembly=FSharpMVVM"
+    Title="MainWindow" Height="450" Width="800">
+```
+
+and in used in our "DataContext":
+
+```xml
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+```
+
+first our ViewModel should implement INotifyPropertyChanged interface to be able to notify WPF binding mechanism about changes that occurs whether in the property or the UI:
+
+```fsharp
+namespace FSharpMVVM.ViewModels
+open System.Windows
+open System.ComponentModel
+
+    type MainWindowViewModel() =
+        let mutable title = ""
+        let mutable content = ""
+        let eventPublisher = new Event<_,_>()
+        interface INotifyPropertyChanged with
+            [<CLIEvent>]
+            member this.PropertyChanged = eventPublisher.Publish
+        member this.Title 
+            with get() = value
+            and set(value) = 
+                title <- value
+                this.eventPublisher.Trigger(new PropertyChangedEventArgs("Title"))
+        member this.Content 
+            with get() = value
+            and set(value) = 
+                content <- value
+                this.eventPublisher.Trigger(new PropertyChangedEventArgs("Content"))
 ```
