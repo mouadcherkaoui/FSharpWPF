@@ -186,3 +186,39 @@ dotnet run
 ```
 
 now we can continue adding views, viewmodels and functions and more, all with the great abilities that a functional first/multiparadigm language can offer.
+
+## INotifyPropertyChanged the FSharp way
+
+one of the most interesting aspects of FSharp is that it is a multi paradigm language, which means that it give you the ability to tackle between different programing paradigm in the same module and better in the same code block where you can hadnle object from .net world inside functions and vice versa, which is a great opportunity to improve our code felxibility and reusability in the dotnet echosystem, also you can handle business logic and processes in clean manner.
+
+in a wpf application this multi paradigm aspect enables us to create our viewmodels and implements the required INotifyPropertyChanged in fsharp way.
+
+first lets talk about Event type and IEvent interface, which are the root components that enables event handling in fsharp world, the Event type is in the same time a delegate and an Observable object. ...
+
+first interface implementation in fsharp is done using the interface declaration block inside the type definition: 
+
+```fsharp
+type MyNotifier = 
+    interface INotifyPropertyChanged with 
+        member this.PropertyChanged = ......
+```
+
+in the code above we define a type MyNotifier that implements INotifyPropertyChanged and we use the with keyword to specify "implements" the interface PropertyChanged as property, but to make it work we should assign a delegate to the PropertyChanged as an event and not a property, first there is no event keyword in fsharp and to ensure interoperability with other .net languages we use the CLIEvent attribute to mark the member as  of event type:
+
+```fsharp
+type MyNotifier = 
+    interface INotifyPropertyChanged with 
+        [<CLIEvent>]
+        member this.PropertyChanged = ......
+```
+
+now we need to assign a delegate to the PropertyChanged member to be abble to triggers it when needed, this is done through a new object of Event<> type: 
+
+```fsharp
+type MyNotifier = 
+    let eventPublisher = Event<_,_>()
+    interface INotifyPropertyChanged with 
+        [<CLIEvent>]
+        member this.PropertyChanged = eventPublisher.Publish
+```
+
