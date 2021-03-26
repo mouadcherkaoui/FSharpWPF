@@ -16,14 +16,8 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Resource Include="UserControls\Participant.xaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>    
-    <Resource Include="Views\MainWindow.xaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="App.xaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>    
+    <Resource Include="UserControls\Participant.xaml"/>    
+    <Resource Include="Views\MainWindow.xaml"/>
+    <Resource Include="App.xaml"/>    
   </ItemGroup>
 </Project>
